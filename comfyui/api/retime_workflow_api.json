@@ -1,0 +1,1059 @@
+{
+  "2": {
+    "inputs": {
+      "embedder_type": "SigLIP",
+      "solver_type": "Direct",
+      "k": 30,
+      "sigma": 20,
+      "lmd": 0.00001,
+      "metric": "angular",
+      "normalize": true,
+      "p": 1,
+      "video_frames": [
+        "25",
+        0
+      ]
+    },
+    "class_type": "ComputeVideoPotential",
+    "_meta": {
+      "title": "Compute Video Potential"
+    }
+  },
+  "17": {
+    "inputs": {
+      "clip_name": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "type": "wan",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "Load CLIP"
+    }
+  },
+  "18": {
+    "inputs": {
+      "shift": 8.000000000000002,
+      "model": [
+        "20",
+        0
+      ]
+    },
+    "class_type": "ModelSamplingSD3",
+    "_meta": {
+      "title": "ModelSamplingSD3"
+    }
+  },
+  "19": {
+    "inputs": {
+      "shift": 8,
+      "model": [
+        "21",
+        0
+      ]
+    },
+    "class_type": "ModelSamplingSD3",
+    "_meta": {
+      "title": "ModelSamplingSD3"
+    }
+  },
+  "20": {
+    "inputs": {
+      "unet_name": "wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "Load Diffusion Model"
+    }
+  },
+  "21": {
+    "inputs": {
+      "unet_name": "wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "Load Diffusion Model"
+    }
+  },
+  "22": {
+    "inputs": {
+      "text": "过曝，静态，细节模糊不清，字幕，风格，作品，画作，画面，静止，整体发灰，最差质量，低质量，JPEG压缩残留，丑陋的，残缺的，多余的手指，画得不好的手部，画得不好的脸部，畸形的，毁容的，形态畸形的肢体，手指融合，静止不动的画面，杂乱的背景，三条腿，背景人很多，倒着走,",
+      "clip": [
+        "17",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Negative Prompt)"
+    }
+  },
+  "23": {
+    "inputs": {
+      "vae_name": "wan_2.1_vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "24": {
+    "inputs": {
+      "width": 480,
+      "height": 480,
+      "length": [
+        "57",
+        0
+      ],
+      "batch_size": 1,
+      "positive": [
+        "28",
+        0
+      ],
+      "negative": [
+        "22",
+        0
+      ],
+      "vae": [
+        "23",
+        0
+      ],
+      "start_image": [
+        "32",
+        0
+      ],
+      "end_image": [
+        "33",
+        0
+      ]
+    },
+    "class_type": "WanFirstLastFrameToVideo",
+    "_meta": {
+      "title": "WanFirstLastFrameToVideo"
+    }
+  },
+  "25": {
+    "inputs": {
+      "samples": [
+        "31",
+        0
+      ],
+      "vae": [
+        "23",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "26": {
+    "inputs": {
+      "fps": 16,
+      "images": [
+        "25",
+        0
+      ]
+    },
+    "class_type": "CreateVideo",
+    "_meta": {
+      "title": "Create Video"
+    }
+  },
+  "28": {
+    "inputs": {
+      "text": "A relaxed housecat resting on a couch gradually morphing into a majestic lion, body slowly enlarging and elongating, fur thickening and deepening in color, facial structure broadening as a mane progressively grows, paws expanding and tail strengthening, while the pose, couch, lighting, and camera remain steady throughout.",
+      "clip": [
+        "17",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Positive Prompt)"
+    }
+  },
+  "29": {
+    "inputs": {
+      "filename_prefix": "video/ComfyUI",
+      "format": "auto",
+      "codec": "auto",
+      "video": [
+        "26",
+        0
+      ]
+    },
+    "class_type": "SaveVideo",
+    "_meta": {
+      "title": "Save Video - baseline"
+    }
+  },
+  "30": {
+    "inputs": {
+      "add_noise": "enable",
+      "noise_seed": [
+        "62",
+        0
+      ],
+      "steps": 20,
+      "cfg": 4,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "start_at_step": 0,
+      "end_at_step": 10,
+      "return_with_leftover_noise": "enable",
+      "model": [
+        "18",
+        0
+      ],
+      "positive": [
+        "24",
+        0
+      ],
+      "negative": [
+        "24",
+        1
+      ],
+      "latent_image": [
+        "24",
+        2
+      ]
+    },
+    "class_type": "KSamplerAdvanced",
+    "_meta": {
+      "title": "KSampler (Advanced)"
+    }
+  },
+  "31": {
+    "inputs": {
+      "add_noise": "disable",
+      "noise_seed": [
+        "62",
+        0
+      ],
+      "steps": 20,
+      "cfg": 4,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "start_at_step": 10,
+      "end_at_step": 10000,
+      "return_with_leftover_noise": "disable",
+      "model": [
+        "19",
+        0
+      ],
+      "positive": [
+        "24",
+        0
+      ],
+      "negative": [
+        "24",
+        1
+      ],
+      "latent_image": [
+        "30",
+        0
+      ]
+    },
+    "class_type": "KSamplerAdvanced",
+    "_meta": {
+      "title": "KSampler (Advanced)"
+    }
+  },
+  "32": {
+    "inputs": {
+      "image": "cat_to_lion_first.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Imagef - First Frame"
+    }
+  },
+  "33": {
+    "inputs": {
+      "image": "cat_to_lion_last.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image - Last Frame"
+    }
+  },
+  "45": {
+    "inputs": {
+      "add_noise": "disable",
+      "noise_seed": [
+        "62",
+        0
+      ],
+      "steps": 20,
+      "cfg": 4,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "start_at_step": 10,
+      "end_at_step": 10000,
+      "return_with_leftover_noise": "disable",
+      "model": [
+        "98",
+        1
+      ],
+      "positive": [
+        "24",
+        0
+      ],
+      "negative": [
+        "24",
+        1
+      ],
+      "latent_image": [
+        "46",
+        0
+      ]
+    },
+    "class_type": "KSamplerAdvanced",
+    "_meta": {
+      "title": "KSampler (Advanced)"
+    }
+  },
+  "46": {
+    "inputs": {
+      "add_noise": "enable",
+      "noise_seed": [
+        "62",
+        0
+      ],
+      "steps": 20,
+      "cfg": 4,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "start_at_step": 0,
+      "end_at_step": 10,
+      "return_with_leftover_noise": "enable",
+      "model": [
+        "98",
+        0
+      ],
+      "positive": [
+        "24",
+        0
+      ],
+      "negative": [
+        "24",
+        1
+      ],
+      "latent_image": [
+        "24",
+        2
+      ]
+    },
+    "class_type": "KSamplerAdvanced",
+    "_meta": {
+      "title": "KSampler (Advanced)"
+    }
+  },
+  "49": {
+    "inputs": {
+      "fps": 16,
+      "images": [
+        "50",
+        0
+      ]
+    },
+    "class_type": "CreateVideo",
+    "_meta": {
+      "title": "Create Video"
+    }
+  },
+  "50": {
+    "inputs": {
+      "samples": [
+        "45",
+        0
+      ],
+      "vae": [
+        "23",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "51": {
+    "inputs": {
+      "filename_prefix": "video/ComfyUI",
+      "format": "auto",
+      "codec": "auto",
+      "video": [
+        "49",
+        0
+      ]
+    },
+    "class_type": "SaveVideo",
+    "_meta": {
+      "title": "Save Video - First re-generation"
+    }
+  },
+  "57": {
+    "inputs": {
+      "value": 81
+    },
+    "class_type": "easy int",
+    "_meta": {
+      "title": "Int"
+    }
+  },
+  "62": {
+    "inputs": {
+      "value": 0
+    },
+    "class_type": "easy int",
+    "_meta": {
+      "title": "Int"
+    }
+  },
+  "66": {
+    "inputs": {
+      "label_1": "Original",
+      "normalize_x": false,
+      "num_frame_samples": 10,
+      "label_2": "re-gen 1",
+      "label_3": "re-gen 2",
+      "label_4": "re-gen 3",
+      "variance_scale": 10,
+      "video_frames_1": [
+        "25",
+        0
+      ],
+      "potential_1": [
+        "69",
+        0
+      ],
+      "video_frames_2": [
+        "50",
+        0
+      ],
+      "potential_2": [
+        "68",
+        0
+      ],
+      "video_frames_3": [
+        "128",
+        0
+      ],
+      "potential_3": [
+        "161",
+        0
+      ],
+      "video_frames_4": [
+        "175",
+        0
+      ],
+      "potential_4": [
+        "178",
+        0
+      ],
+      "variance_1": [
+        "69",
+        2
+      ],
+      "variance_2": [
+        "68",
+        2
+      ],
+      "variance_3": [
+        "161",
+        2
+      ],
+      "variance_4": [
+        "178",
+        2
+      ]
+    },
+    "class_type": "ComparePotentials",
+    "_meta": {
+      "title": "Compare Video Potentials"
+    }
+  },
+  "68": {
+    "inputs": {
+      "embedder_type": "SigLIP",
+      "solver_type": "Direct",
+      "k": 30,
+      "sigma": 20,
+      "lmd": 0.00001,
+      "metric": "angular",
+      "normalize": true,
+      "p": 1,
+      "video_frames": [
+        "50",
+        0
+      ]
+    },
+    "class_type": "ComputeVideoPotential",
+    "_meta": {
+      "title": "Compute Video Potential"
+    }
+  },
+  "69": {
+    "inputs": {
+      "embedder_type": "SigLIP",
+      "solver_type": "Direct",
+      "k": 30,
+      "sigma": 20,
+      "lmd": 0.00001,
+      "metric": "angular",
+      "normalize": true,
+      "p": 1,
+      "video_frames": [
+        "25",
+        0
+      ]
+    },
+    "class_type": "ComputeVideoPotential",
+    "_meta": {
+      "title": "Compute Video Potential"
+    }
+  },
+  "85": {
+    "inputs": {
+      "fps": 16,
+      "images": [
+        "164",
+        0
+      ]
+    },
+    "class_type": "CreateVideo",
+    "_meta": {
+      "title": "Create Video"
+    }
+  },
+  "86": {
+    "inputs": {
+      "filename_prefix": "video/ComfyUI",
+      "format": "auto",
+      "codec": "auto",
+      "video": [
+        "85",
+        0
+      ]
+    },
+    "class_type": "SaveVideo",
+    "_meta": {
+      "title": "Save Video"
+    }
+  },
+  "94": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "66",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "95": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "98",
+        3
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "98": {
+    "inputs": {
+      "iteration": 0,
+      "num_output_frames": 0,
+      "method": "rope_blend",
+      "schedule_mode": "exp_decay",
+      "alpha_high": 0.2,
+      "alpha_mid": 1,
+      "alpha_low": 0.8,
+      "custom_schedule": "",
+      "timestep_decay": "exp_up",
+      "decay_start": 0,
+      "decay_end": 1,
+      "reference_type": "linear",
+      "reference_temperature": 3,
+      "frame_to_latent_aggregation": "sample",
+      "correction_space": "latent",
+      "model_high_noise": [
+        "18",
+        0
+      ],
+      "model_low_noise": [
+        "19",
+        0
+      ],
+      "potential": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "FrequencyAwareWarpDual",
+    "_meta": {
+      "title": "Frequency-Aware Warp Dual (Wan 2.2)"
+    }
+  },
+  "124": {
+    "inputs": {
+      "add_noise": "enable",
+      "noise_seed": [
+        "62",
+        0
+      ],
+      "steps": 20,
+      "cfg": 4,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "start_at_step": 0,
+      "end_at_step": 10,
+      "return_with_leftover_noise": "enable",
+      "model": [
+        "130",
+        0
+      ],
+      "positive": [
+        "24",
+        0
+      ],
+      "negative": [
+        "24",
+        1
+      ],
+      "latent_image": [
+        "24",
+        2
+      ]
+    },
+    "class_type": "KSamplerAdvanced",
+    "_meta": {
+      "title": "KSampler (Advanced)"
+    }
+  },
+  "125": {
+    "inputs": {
+      "add_noise": "disable",
+      "noise_seed": [
+        "62",
+        0
+      ],
+      "steps": 20,
+      "cfg": 4,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "start_at_step": 10,
+      "end_at_step": 10000,
+      "return_with_leftover_noise": "disable",
+      "model": [
+        "130",
+        1
+      ],
+      "positive": [
+        "24",
+        0
+      ],
+      "negative": [
+        "24",
+        1
+      ],
+      "latent_image": [
+        "124",
+        0
+      ]
+    },
+    "class_type": "KSamplerAdvanced",
+    "_meta": {
+      "title": "KSampler (Advanced)"
+    }
+  },
+  "127": {
+    "inputs": {
+      "fps": 16,
+      "images": [
+        "128",
+        0
+      ]
+    },
+    "class_type": "CreateVideo",
+    "_meta": {
+      "title": "Create Video"
+    }
+  },
+  "128": {
+    "inputs": {
+      "samples": [
+        "125",
+        0
+      ],
+      "vae": [
+        "23",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "129": {
+    "inputs": {
+      "filename_prefix": "video/ComfyUI",
+      "format": "auto",
+      "codec": "auto",
+      "video": [
+        "127",
+        0
+      ]
+    },
+    "class_type": "SaveVideo",
+    "_meta": {
+      "title": "Save Video - Second re-generation"
+    }
+  },
+  "130": {
+    "inputs": {
+      "iteration": [
+        "98",
+        6
+      ],
+      "num_output_frames": 0,
+      "method": "rope_blend",
+      "schedule_mode": "exp_decay",
+      "alpha_high": 0.2,
+      "alpha_mid": 0,
+      "alpha_low": 0.8,
+      "custom_schedule": "",
+      "timestep_decay": "exp_up",
+      "decay_start": 0,
+      "decay_end": 1,
+      "reference_type": "linear",
+      "reference_temperature": 3,
+      "frame_to_latent_aggregation": "sample",
+      "correction_space": "latent",
+      "model_high_noise": [
+        "98",
+        0
+      ],
+      "model_low_noise": [
+        "98",
+        1
+      ],
+      "potential": [
+        "134",
+        0
+      ],
+      "base_positions": [
+        "98",
+        2
+      ]
+    },
+    "class_type": "FrequencyAwareWarpDual",
+    "_meta": {
+      "title": "Frequency-Aware Warp Dual (Wan 2.2)"
+    }
+  },
+  "134": {
+    "inputs": {
+      "embedder_type": "SigLIP",
+      "solver_type": "Direct",
+      "k": 30,
+      "sigma": 20,
+      "lmd": 0.00001,
+      "metric": "angular",
+      "normalize": true,
+      "p": 1,
+      "video_frames": [
+        "50",
+        0
+      ]
+    },
+    "class_type": "ComputeVideoPotential",
+    "_meta": {
+      "title": "Compute Video Potential"
+    }
+  },
+  "135": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "130",
+        3
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "161": {
+    "inputs": {
+      "embedder_type": "SigLIP",
+      "solver_type": "Direct",
+      "k": 30,
+      "sigma": 20,
+      "lmd": 0.00001,
+      "metric": "angular",
+      "normalize": true,
+      "p": 1,
+      "video_frames": [
+        "128",
+        0
+      ]
+    },
+    "class_type": "ComputeVideoPotential",
+    "_meta": {
+      "title": "Compute Video Potential"
+    }
+  },
+  "164": {
+    "inputs": {
+      "inputcount": 4,
+      "direction": "right",
+      "match_image_size": true,
+      "Update inputs": null,
+      "image_1": [
+        "25",
+        0
+      ],
+      "image_2": [
+        "50",
+        0
+      ],
+      "image_3": [
+        "128",
+        0
+      ],
+      "image_4": [
+        "175",
+        0
+      ]
+    },
+    "class_type": "ImageConcatMulti",
+    "_meta": {
+      "title": "Image Concatenate Multi"
+    }
+  },
+  "165": {
+    "inputs": {
+      "add_noise": "enable",
+      "noise_seed": [
+        "62",
+        0
+      ],
+      "steps": 20,
+      "cfg": 4,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "start_at_step": 0,
+      "end_at_step": 10,
+      "return_with_leftover_noise": "enable",
+      "model": [
+        "177",
+        0
+      ],
+      "positive": [
+        "24",
+        0
+      ],
+      "negative": [
+        "24",
+        1
+      ],
+      "latent_image": [
+        "24",
+        2
+      ]
+    },
+    "class_type": "KSamplerAdvanced",
+    "_meta": {
+      "title": "KSampler (Advanced)"
+    }
+  },
+  "166": {
+    "inputs": {
+      "add_noise": "disable",
+      "noise_seed": [
+        "62",
+        0
+      ],
+      "steps": 20,
+      "cfg": 4,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "start_at_step": 10,
+      "end_at_step": 10000,
+      "return_with_leftover_noise": "disable",
+      "model": [
+        "177",
+        1
+      ],
+      "positive": [
+        "24",
+        0
+      ],
+      "negative": [
+        "24",
+        1
+      ],
+      "latent_image": [
+        "165",
+        0
+      ]
+    },
+    "class_type": "KSamplerAdvanced",
+    "_meta": {
+      "title": "KSampler (Advanced)"
+    }
+  },
+  "167": {
+    "inputs": {
+      "fps": 16,
+      "images": [
+        "175",
+        0
+      ]
+    },
+    "class_type": "CreateVideo",
+    "_meta": {
+      "title": "Create Video"
+    }
+  },
+  "168": {
+    "inputs": {
+      "filename_prefix": "video/ComfyUI",
+      "format": "auto",
+      "codec": "auto",
+      "video": [
+        "167",
+        0
+      ]
+    },
+    "class_type": "SaveVideo",
+    "_meta": {
+      "title": "Save Video - Third re-generation"
+    }
+  },
+  "174": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "177",
+        3
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "175": {
+    "inputs": {
+      "samples": [
+        "166",
+        0
+      ],
+      "vae": [
+        "23",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "176": {
+    "inputs": {
+      "embedder_type": "SigLIP",
+      "solver_type": "Direct",
+      "k": 30,
+      "sigma": 20,
+      "lmd": 0.00001,
+      "metric": "angular",
+      "normalize": true,
+      "p": 1,
+      "video_frames": [
+        "128",
+        0
+      ]
+    },
+    "class_type": "ComputeVideoPotential",
+    "_meta": {
+      "title": "Compute Video Potential"
+    }
+  },
+  "177": {
+    "inputs": {
+      "iteration": [
+        "130",
+        6
+      ],
+      "num_output_frames": 0,
+      "method": "rope_blend",
+      "schedule_mode": "exp_decay",
+      "alpha_high": 0.2,
+      "alpha_mid": 0,
+      "alpha_low": 0.8,
+      "custom_schedule": "",
+      "timestep_decay": "exp_up",
+      "decay_start": 0,
+      "decay_end": 1,
+      "reference_type": "linear",
+      "reference_temperature": 3,
+      "frame_to_latent_aggregation": "sample",
+      "correction_space": "latent",
+      "model_high_noise": [
+        "130",
+        0
+      ],
+      "model_low_noise": [
+        "130",
+        1
+      ],
+      "potential": [
+        "176",
+        0
+      ],
+      "base_positions": [
+        "130",
+        2
+      ]
+    },
+    "class_type": "FrequencyAwareWarpDual",
+    "_meta": {
+      "title": "Frequency-Aware Warp Dual (Wan 2.2)"
+    }
+  },
+  "178": {
+    "inputs": {
+      "embedder_type": "SigLIP",
+      "solver_type": "Direct",
+      "k": 30,
+      "sigma": 20,
+      "lmd": 0.00001,
+      "metric": "angular",
+      "normalize": true,
+      "p": 1,
+      "video_frames": [
+        "175",
+        0
+      ]
+    },
+    "class_type": "ComputeVideoPotential",
+    "_meta": {
+      "title": "Compute Video Potential"
+    }
+  }
+}
