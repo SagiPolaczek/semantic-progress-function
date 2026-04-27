@@ -1,0 +1,369 @@
+/**
+ * Section-specific Styles
+ * ReTime Project
+ */
+
+/* ============================================================================
+   Hero Section
+   ============================================================================ */
+
+.hero-section {
+    background-color: var(--blue-medium);
+    position: relative;
+    z-index: 1;
+    overflow: visible;
+}
+
+.hero-section .hero-video-container {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.hero-section .hero-video {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    display: block;
+}
+
+.hero-section .hero-tagline {
+    font-size: 1.1em;
+    color: #555;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+/* ============================================================================
+   Problem Section
+   ============================================================================ */
+
+.problem-section {
+    background-color: var(--blue-light);
+}
+
+.problem-section .section-intro {
+    max-width: 800px;
+    margin: 0 auto 2rem auto;
+    text-align: center;
+    color: #555;
+    font-size: 1.05em;
+    line-height: 1.6;
+}
+
+/* Problem videos grid */
+.problem-videos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto 2rem auto;
+}
+
+.problem-video-item {
+    text-align: center;
+}
+
+.problem-video-item video {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.problem-video-item .caption {
+    margin-top: 0.5rem;
+    font-style: italic;
+    color: #666;
+    font-size: 0.9em;
+}
+
+/* Abrupt region marker */
+.abrupt-marker {
+    color: #e63946;
+    font-weight: 600;
+}
+
+/* SPF explanation in problem section */
+.problem-spf-note {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: var(--blue-medium);
+    border-radius: 12px;
+    text-align: center;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.problem-spf-note .spf-curve-source {
+    color: #e63946;
+    font-weight: 600;
+}
+
+.problem-spf-note .spf-curve-retime {
+    color: #2a9d8f;
+    font-weight: 600;
+}
+
+/* ============================================================================
+   Method Section
+   ============================================================================ */
+
+.method-section {
+    background-color: var(--blue-medium);
+}
+
+.method-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.method-card {
+    flex: 1;
+    min-width: 280px;
+    max-width: 350px;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.method-card h4 {
+    color: var(--accent-blue);
+    margin-bottom: 0.75rem;
+}
+
+.method-card p {
+    font-size: 0.95em;
+    text-align: left;
+    line-height: 1.5;
+}
+
+/* ============================================================================
+   Gallery Section
+   ============================================================================ */
+
+.gallery-section {
+    background-color: var(--blue-light);
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.gallery-item {
+    text-align: center;
+}
+
+.gallery-item video {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.gallery-item .label {
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+
+.gallery-header-labels {
+    display: flex;
+    margin-bottom: 0.3rem;
+    justify-content: center;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.gallery-header-labels span {
+    width: 50%;
+    text-align: center;
+}
+
+/* ============================================================================
+   SPF Visualization Section
+   ============================================================================ */
+
+.spf-viz-section {
+    background-color: var(--blue-medium);
+}
+
+.spf-viz-container {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.spf-viz-video {
+    width: 100%;
+    max-width: 960px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.spf-viz-legend {
+    margin-top: 1rem;
+    color: #666;
+    font-size: 0.9em;
+}
+
+/* ============================================================================
+   LTX-2 Section
+   ============================================================================ */
+
+.ltx2-section {
+    background-color: var(--blue-light);
+}
+
+.ltx2-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.ltx2-item {
+    text-align: center;
+}
+
+.ltx2-item video {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.ltx2-item .label {
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+
+.ltx2-note {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #666;
+    font-size: 0.9em;
+}
+
+/* ============================================================================
+   Applications Section
+   ============================================================================ */
+
+.applications-section {
+    background-color: var(--blue-light);
+}
+
+.applications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.application-card {
+    padding: 1.5rem;
+    background: var(--blue-medium);
+    border-radius: 12px;
+    text-align: center;
+}
+
+.application-card h4 {
+    margin-bottom: 0.5rem;
+}
+
+.application-card p {
+    font-size: 0.95em;
+    color: #555;
+}
+
+/* ============================================================================
+   Abstract Section
+   ============================================================================ */
+
+.abstract-section {
+    background-color: var(--blue-light);
+}
+
+.abstract-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: justify;
+    line-height: 1.7;
+}
+
+/* ============================================================================
+   BibTeX Section
+   ============================================================================ */
+
+.bibtex-section {
+    background-color: var(--blue-light);
+}
+
+.bibtex-container {
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.bibtex-block {
+    background: #f5f5f5;
+    padding: 1.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+.bibtex-block pre {
+    margin: 0;
+    font-size: 0.85em;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.bibtex-copy-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: var(--accent-blue);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+    transition: background 0.3s ease;
+}
+
+.bibtex-copy-btn:hover {
+    background: #1e6a8a;
+}
+
+/* ============================================================================
+   Responsive Adjustments
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    .problem-videos-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+    }
+
+    .ltx2-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .method-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .method-card {
+        max-width: 100%;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+}
