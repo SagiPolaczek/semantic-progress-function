@@ -105,9 +105,14 @@ git clone https://github.com/kijai/ComfyUI-KJNodes.git
 
 Start ComfyUI and drag `comfyui/retime_workflow.json` into the UI.
 
-## Citation
+## ✍🏼 Citation
 If you find this code useful for your research, please consider citing us:
 
 ```
-tbd
+@article{metzer2026video,
+  title={Video Analysis and Generation via a Semantic Progress Function},
+  author={Metzer, Gal and Polaczek, Sagi and Mahdavi-Amiri, Ali and Giryes, Raja and Cohen-Or, Daniel},
+  journal={arXiv preprint arXiv:2604.22554},
+  year={2026}
+}
 ```
